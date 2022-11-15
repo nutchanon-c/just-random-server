@@ -16,13 +16,13 @@ app.get("/", (req, res) => {
 app.get("/random/coin", (req, res) => {
   let randomResult = randomIntFromInterval(0, 1);
   // console.log(`Random coin result ${randomResult}`);
-  res.json({ result: randomResult === 1 ? "tails" : "heads" });
+  res.status(200).json({ result: randomResult === 1 ? "tails" : "heads" });
 });
 
 app.get("/random/dice", (req, res) => {
   let randomResult = randomIntFromInterval(1, 6);
   // console.log(`Random dice result ${randomResult}`);
-  res.json({ result: randomResult });
+  res.status(200).json({ result: randomResult });
 });
 
 app.get("/random/card", (req, res) => {
@@ -60,7 +60,7 @@ app.get("/random/card", (req, res) => {
     default:
       break;
   }
-  res.json({
+  res.status(200).json({
     randomNumber: randomNumber,
     suiteNumber: randomSuite,
     cardValue: number,
@@ -71,7 +71,7 @@ app.get("/random/card", (req, res) => {
 app.get("/random/number", (req, res) => {
   let randomResult = randomIntFromInterval(0, 100);
   // console.log(`Random coin result ${randomResult}`);
-  res.json({ result: randomResult });
+  res.status(200).json({ result: randomResult });
 });
 
 app.listen(port, () => {

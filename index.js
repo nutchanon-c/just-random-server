@@ -1,7 +1,10 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 var cors = require("cors");
 const app = express();
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 const port = 3000;
 
 function randomIntFromInterval(min, max) {
@@ -61,17 +64,36 @@ app.get("/random/card", (req, res) => {
       break;
   }
   res.status(200).json({
-    randomNumber: randomNumber,
-    suiteNumber: randomSuite,
-    cardValue: number,
-    suite: suite,
+    result: {
+      randomNumber: randomNumber,
+      suiteNumber: randomSuite,
+      cardValue: number,
+      suite: suite,
+    },
   });
 });
 
-app.get("/random/number", (req, res) => {
-  let randomResult = randomIntFromInterval(0, 100);
+app.post("/random/number", (req, res) => {
+  console.log(req.body.min);
+  let min = req.body.min;
+  let max = req.body.max;
+  let randomResult = randomIntFromInterval(min, max);
   // console.log(`Random coin result ${randomResult}`);
   res.status(200).json({ result: randomResult });
+});
+
+app.post("/random/list", (req, res) => {
+  // console.log(req.body.list);
+  let list = req.body.list;
+  let chosen = list[Math.floor(Math.random() * list.length)];
+  // console.log(`Random coin result ${randomResult}`);
+  res.status(200).json({ result: chosen });
+});
+
+app.get("/random/yesno", (req, res) => {
+  let randomResult = randomIntFromInterval(0, 1);
+
+  res.status(200).json({ result: randomResult === 1 ? "yes" : "no" });
 });
 
 app.listen(port, () => {

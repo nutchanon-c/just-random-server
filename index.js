@@ -39,10 +39,13 @@ app.get("/random/card", (req, res) => {
       break;
     case 12:
       number = "Q";
+      break;
     case 13:
       number = "K";
+      break;
     case 1:
       number = "A";
+      break;
     default:
       break;
   }

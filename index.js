@@ -18,13 +18,11 @@ app.get("/", (req, res) => {
 
 app.get("/random/coin", (req, res) => {
   let randomResult = randomIntFromInterval(0, 1);
-  // console.log(`Random coin result ${randomResult}`);
   res.status(200).json({ result: randomResult === 1 ? "tails" : "heads" });
 });
 
 app.get("/random/dice", (req, res) => {
   let randomResult = randomIntFromInterval(1, 6);
-  // console.log(`Random dice result ${randomResult}`);
   res.status(200).json({ result: randomResult });
 });
 
@@ -49,7 +47,6 @@ app.get("/random/card", (req, res) => {
     default:
       break;
   }
-
   switch (randomSuite) {
     case 1:
       suite = "Spades";
@@ -81,15 +78,12 @@ app.post("/random/number", (req, res) => {
   let min = req.body.min;
   let max = req.body.max;
   let randomResult = randomIntFromInterval(min, max);
-  // console.log(`Random coin result ${randomResult}`);
   res.status(200).json({ result: randomResult });
 });
 
 app.post("/random/list", (req, res) => {
-  // console.log(req.body.list);
   let list = req.body.list;
   let chosen = list[Math.floor(Math.random() * list.length)];
-  // console.log(`Random coin result ${randomResult}`);
   res.status(200).json({ result: chosen });
 });
 
